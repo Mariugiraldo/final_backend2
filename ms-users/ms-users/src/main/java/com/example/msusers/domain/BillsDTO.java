@@ -4,7 +4,7 @@ import lombok.*;
 
 @AllArgsConstructor
 @Data
-public class Bill {
+public class BillsDTO {
     private String idBill;
     private String customerBill;
     private String productBill;

@@ -23,9 +23,10 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                 matcher -> matcher
-                        .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/bills/all").hasRole(USER)
-                        .anyRequest().authenticated());
+                        //.requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/create").hasAuthority("PROVIDERS")
+                        .requestMatchers(HttpMethod.POST, "/find/{id}").authenticated());
+                       // .anyRequest().authenticated());
         http.oauth2ResourceServer()
                 .jwt()
                 .jwtAuthenticationConverter(jwtAuthConverter);

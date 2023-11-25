@@ -2,7 +2,12 @@ spring:
   application:
     name: ms-users
 
-eureka:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            authorization-grant-type=client_credentials:eureka:
   instance:
     hostname: localhost
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
@@ -12,3 +17,4 @@ eureka:
 
 server:
   port: 8081
+
