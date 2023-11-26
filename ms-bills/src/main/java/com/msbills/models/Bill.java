@@ -21,9 +21,9 @@ public class Bill {
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String idBill;
 
-    private String customerBill;
+    private String customerId;
 
-    private String productBill;
+    private String productId;
 
     private Double totalPrice;
 

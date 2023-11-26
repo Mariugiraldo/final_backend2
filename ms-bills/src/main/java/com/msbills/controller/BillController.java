@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -22,12 +23,21 @@ public class BillController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String>createBills(@RequestBody Bill bills){
-        return new ResponseEntity<>("Factura creada exitosamente", HttpStatus.CREATED);
+    public ResponseEntity<Bill> save(@RequestBody Bill bill) {
+        if (bill == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La factura no puede ser nula");
+        }
+
+        if (bill.getCustomerId() == null || bill.getCustomerId().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El id del usuario no puede ser nulo/vacio");
+        }
+
+        return ResponseEntity.ok(service.saveBill(bill));
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<String>findById(@PathVariable String userId){
-        return new ResponseEntity<>("Facturas encontradas para el usuario: " + userId, HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Bill>> findBillById(@PathVariable String id) {
+        List<Bill> bills = service.findBillsByUserId(id);
+        return new ResponseEntity<>(bills, HttpStatus.OK);
     }
 }

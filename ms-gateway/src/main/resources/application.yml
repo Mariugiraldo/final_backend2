@@ -1,5 +1,7 @@
 server:
   port: 9090
+  error:
+    include-message: always
 
 spring:
   security:
@@ -12,8 +14,9 @@ spring:
         registration:
           keycloak-gateway:
             client-id: api-gateway-client
-            client-secret: zAd9lUPeIvd3z9u31M4rpCViHW4TI6fO
+            client-secret: qH5sJjvw46BCSX9NlUoZLKA0ziWxMvj6
             scope:
+              - openid
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:9090/login/oauth2/code/keycloak
 
@@ -24,3 +27,7 @@ spring:
         - id: ms-bills
           uri: http://localhost:8086
           predicates: Path=/bills/**
+
+        - id: ms-users
+          uri: http://localhost:8081
+          predicates: Path=/users/**

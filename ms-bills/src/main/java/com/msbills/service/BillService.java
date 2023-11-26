@@ -12,9 +12,17 @@ import java.util.List;
 public class BillService {
 
     private final BillRepository repository;
+    private Bill bill;
 
     public List<Bill> getAllBill() {
         return repository.findAll();
     }
 
+    public Bill saveBill(Bill bill) {
+        return repository.save(bill);
+    }
+
+    public List<Bill> findBillsByUserId(String id) {
+        return repository.findAllByCustomerId(id);
+    }
 }

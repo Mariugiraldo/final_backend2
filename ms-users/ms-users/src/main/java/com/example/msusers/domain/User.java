@@ -3,14 +3,11 @@ package com.example.msusers.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 public class User {
     private String id;
-    private String name;
-    private String factura;
-    private BillsDTO billsDTO;
-
-
-
+    private String username;
+    private String email;
+    private String firstname;
 }
